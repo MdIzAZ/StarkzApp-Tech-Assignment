@@ -14,176 +14,6 @@ class ProfileDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /*return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 400.0,
-            pinned: true,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Hero(
-                tag: 'profile_picture_${user.id}',
-                child: CachedNetworkImage(
-                  imageUrl: user.pictureLarge,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) =>
-                  const Center(child: CircularProgressIndicator()),
-                  errorWidget: (context, url, error) =>
-                  const Icon(Icons.error),
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              padding: const EdgeInsets.all(24.0),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(24),
-                  topRight: Radius.circular(24),
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '${user.firstName}, ${user.age}',
-                        style: const TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-                      BlocBuilder<ProfileBloc, ProfileState>(
-                        builder: (context, state) {
-                          bool isLiked = false;
-                          if (state is ProfileLoaded) {
-                            final currentUser = state.users.firstWhere((u) => u.id == user.id);
-                            isLiked = currentUser.isLiked;
-                          }
-                          return AnimatedHeartIcon(
-                            isLiked: isLiked,
-                            onTap: () {
-                              context
-                                  .read<ProfileBloc>()
-                                  .add(ToggleLike(user.id));
-                            },
-                          );
-                        },
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'Location',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    '${user.city}, ${user.country}',
-                    style: const TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
-    );*/
-    /*return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: Hero(
-              tag: 'profile_picture_${user.id}',
-              child: CachedNetworkImage(
-                imageUrl: user.pictureLarge,
-                fit: BoxFit.cover,
-                width: double.infinity,
-                placeholder: (context, url) =>
-                const Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
-              ),
-            ),
-          ),
-
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(24.0),
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(24),
-                topRight: Radius.circular(24),
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '${user.firstName}, ${user.age}',
-                      style: const TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                    BlocBuilder<ProfileBloc, ProfileState>(
-                      builder: (context, state) {
-                        bool isLiked = false;
-                        if (state is ProfileLoaded) {
-                          final currentUser =
-                          state.users.firstWhere((u) => u.id == user.id);
-                          isLiked = currentUser.isLiked;
-                        }
-                        return AnimatedHeartIcon(
-                          isLiked: isLiked,
-                          onTap: () {
-                            context
-                                .read<ProfileBloc>()
-                                .add(ToggleLike(user.id));
-                          },
-                        );
-                      },
-                    )
-                  ],
-                ),
-                const SizedBox(height: 8),
-                const Text(
-                  'Location',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  '${user.city}, ${user.country}',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );*/
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -195,10 +25,10 @@ class ProfileDetailScreen extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: user.pictureLarge,
                 fit: BoxFit.fitHeight,
-                placeholder: (context, url) =>
-                const Center(child: CircularProgressIndicator()),
-                errorWidget: (context, url, error) =>
-                const Icon(Icons.error),
+                placeholder:
+                    (context, url) =>
+                        const Center(child: CircularProgressIndicator()),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
           ),
@@ -206,71 +36,102 @@ class ProfileDetailScreen extends StatelessWidget {
           // ⚪ Bottom white detail section
           Align(
             alignment: Alignment.bottomCenter,
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(24.0),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(24),
-                  topRight: Radius.circular(24),
-                ),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min, // only take needed height
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '${user.firstName}, ${user.age}',
-                        style: const TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                // White section with inward curved notch
+                ClipPath(
+                  clipper: TopNotchClipper(),
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.fromLTRB(24, 40, 24, 24),
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(24),
+                        topRight: Radius.circular(24),
+                      ),
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '${user.firstName}, ${user.age}',
+                              style: const TextStyle(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                            BlocBuilder<ProfileBloc, ProfileState>(
+                              builder: (context, state) {
+                                bool isLiked = false;
+                                if (state is ProfileLoaded) {
+                                  final currentUser = state.users.firstWhere(
+                                    (u) => u.id == user.id,
+                                  );
+                                  isLiked = currentUser.isLiked;
+                                }
+                                return AnimatedHeartIcon(
+                                  isLiked: isLiked,
+                                  onTap:
+                                      () => context.read<ProfileBloc>().add(
+                                        ToggleLike(user.id),
+                                      ),
+                                );
+                              },
+                            ),
+                          ],
                         ),
-                      ),
-                      BlocBuilder<ProfileBloc, ProfileState>(
-                        builder: (context, state) {
-                          bool isLiked = false;
-                          if (state is ProfileLoaded) {
-                            final currentUser = state.users
-                                .firstWhere((u) => u.id == user.id);
-                            isLiked = currentUser.isLiked;
-                          }
-                          return AnimatedHeartIcon(
-                            isLiked: isLiked,
-                            onTap: () => context
-                                .read<ProfileBloc>()
-                                .add(ToggleLike(user.id)),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'Location',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
+                        const SizedBox(height: 8),
+                        const Text(
+                          'Location',
+                          style: TextStyle(fontSize: 16, color: Colors.grey),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          '${user.city}, ${user.country}',
+                          style: const TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    '${user.city}, ${user.country}',
-                    style: const TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
+                ),
+
+                // Floating handle bar INSIDE the notch
+                Positioned(
+                  top: -4,
+                  left: 0,
+                  right: 0,
+                  child: Center(
+                    child: Container(
+                      width: 60,
+                      height: 5,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(3),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black26,
+                            blurRadius: 3,
+                            offset: const Offset(0, 1),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
 
-          // 🔹 Top "AppBar-like" icons floating over image
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
@@ -297,10 +158,8 @@ class ProfileDetailScreen extends StatelessWidget {
         ],
       ),
     );
-
   }
 }
-
 
 class _TopIconButton extends StatelessWidget {
   final IconData icon;
@@ -323,4 +182,53 @@ class _TopIconButton extends StatelessWidget {
       ),
     );
   }
+}
+
+class TopNotchClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    final path = Path();
+    const cornerRadius = 24.0;
+    const notchWidth = 80.0;
+    const notchDepth = 8.0;
+
+    // Start from the top left, after the corner radius.
+    path.moveTo(cornerRadius, 0);
+
+    // Draw the line to the notch's left side
+    final halfWidth = size.width / 2;
+    path.lineTo(halfWidth - notchWidth / 2, 0);
+
+    // --- Rectangular Notch Logic ---
+    // Draw down to create the left side of the notch
+    path.lineTo(halfWidth - notchWidth / 2 + 10, notchDepth);
+    // Draw across to create the bottom of the notch
+    path.lineTo(halfWidth + notchWidth / 2 - 10, notchDepth);
+    // Draw up to create the right side of the notch
+    path.lineTo(halfWidth + notchWidth / 2, 0);
+
+    // Draw the line from the notch to the top right corner
+    path.lineTo(size.width - cornerRadius, 0);
+
+    // Draw the top right corner
+    path.quadraticBezierTo(size.width, 0, size.width, cornerRadius);
+
+    // Draw the right side
+    path.lineTo(size.width, size.height);
+
+    // Draw the bottom side
+    path.lineTo(0, size.height);
+
+    // Draw the left side
+    path.lineTo(0, cornerRadius);
+
+    // Draw the top left corner
+    path.quadraticBezierTo(0, 0, cornerRadius, 0);
+
+    path.close();
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }
